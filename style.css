@@ -4,6 +4,7 @@
 }
 
 body {
+  font-family: 'Rye', cursive;
   background: url('./table.png');
   background-size: cover;
   background-repeat: no-repeat;
@@ -13,9 +14,12 @@ body {
 .draw-btn, .shuffle-btn {
   padding: 1em;
   font-size: 1.25rem;
-  background: yellow;
+  background: #AC714A;
+  color: #D9D7C7;
   border: none;
   cursor: pointer;
+  font-family: inherit;
+  border-radius: 5px;
 }
 
 .draw-btn {
