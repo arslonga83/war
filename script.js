@@ -10,13 +10,13 @@ function draw2() {
   fetch(`https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw/?count=2`)
     .then(res => res.json())
     .then(data => {
+      console.log(data.cards)
       document.querySelector('#img-container').innerHTML = `
-      <img src=${data.cards[0].images.png}>
-      <img src=${data.cards[1].images.png}>
+      <img src=${data.cards[0].image}>
+      <img src=${data.cards[1].image}>
       `
     })
 }
 
-
-document.querySelector('#newDeckBtn').addEventListener('click', getDeck)
+document.querySelector('#shuffleBtn').addEventListener('click', getDeck)
 document.querySelector('#drawBtn').addEventListener('click', draw2)

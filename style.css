@@ -1,0 +1,27 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: url('./table.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.draw-btn, .shuffle-btn {
+  padding: 1em;
+  font-size: 1.25rem;
+  background: yellow;
+  border: none;
+  cursor: pointer;
+}
+
+.draw-btn {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-size: 2rem;
+  font-weight: bold;
+}
