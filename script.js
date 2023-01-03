@@ -3,20 +3,24 @@ let deckId = ''
 function getDeck() {
   fetch('https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/')
   .then(res => res.json())
-  .then(data => deckId = data.deck_id)
+  .then(data => {
+    deckId = data.deck_id
+    document.querySelector('#remainingCards').innerHTML = `Remaining Cards: ${data.remaining}`
+  })
 }
 
 function draw2() {
   fetch(`https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw/?count=2`)
     .then(res => res.json())
     .then(data => {
-      console.log(data.cards)
+      console.log(data)
       document.querySelector('#cardSlot1').innerHTML = `
       <img src=${data.cards[0].image}>`
       document.querySelector('#cardSlot2').innerHTML = `
       <img src=${data.cards[1].image}>
       `
       document.querySelector('#result').innerHTML = getWinner(data.cards[0], data.cards[1])
+      document.querySelector('#remainingCards').innerHTML = `Remaining Cards: ${data.remaining}`
     })
 }
 
@@ -36,10 +40,11 @@ function getWinner(card1, card2) {
     'KING': 13,
     'ACE': 14
   }
+
   if (cardKey[card1.value] > cardKey[card2.value]) {
-    return 'Computer Wins'
+    return 'Card 1 Wins'
   } else if (cardKey[card1.value] < cardKey[card2.value]) {
-    return 'You Win'
+    return 'Card 2 Wins'
   } else return 'War!'
 }
 
