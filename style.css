@@ -9,6 +9,9 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .draw-btn, .shuffle-btn {
@@ -23,9 +26,58 @@ body {
 }
 
 .draw-btn {
-  position: fixed;
-  bottom: 0;
   width: 100%;
   font-size: 2rem;
   font-weight: bold;
+}
+
+.shuffle-btn {
+  width: fit-content;
+}
+
+.img-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  gap: 3em;
+}
+
+.card-slot-1, .card-slot-2 {
+  height: 200px;
+  width: calc(200px * 5 / 7);
+  border: 2px solid black;
+  border-radius: 15px;
+}
+
+img {
+  height: 200px;
+}
+
+@media(min-width: 550px) {
+  .img-container {
+    flex-direction: row;
+    justify-content: center;
+    gap: 4em;
+  }
+  .card-slot-1, .card-slot-2 {
+    height: 300px;
+    width: calc(300px * 5 / 7);
+  }
+  img {
+    height: 300px;
+  }
+}
+
+@media(min-width: 720px) {
+  .img-container {
+    gap: 6em;
+  }
+  .card-slot-1, .card-slot-2 {
+    height: 400px;
+    width: calc(400px * 5 / 7);
+  }
+  img {
+    height: 400px;
+  }
 }

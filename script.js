@@ -11,8 +11,9 @@ function draw2() {
     .then(res => res.json())
     .then(data => {
       console.log(data.cards)
-      document.querySelector('#img-container').innerHTML = `
-      <img src=${data.cards[0].image}>
+      document.querySelector('#cardSlot1').innerHTML = `
+      <img src=${data.cards[0].image}>`
+      document.querySelector('#cardSlot2').innerHTML = `
       <img src=${data.cards[1].image}>
       `
     })
