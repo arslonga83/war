@@ -10,9 +10,9 @@ function getDeck() {
     deckId = data.deck_id
     document.querySelector('#remainingCards').innerHTML = `Remaining Cards: ${data.remaining}`
     drawBtn.disabled = false;
-    drawBtn.classList.remove('btnDisabled')
+
     shuffleBtn.disabled = true;
-    shuffleBtn.classList.add('btnDisabled')
+
     document.querySelector('#result').innerHTML = ``
   })
 }
@@ -33,9 +33,7 @@ function draw2() {
       } 
       else {
         drawBtn.disabled = true;
-        drawBtn.classList.add('btnDisabled')
         shuffleBtn.disabled = false;
-        shuffleBtn.classList.remove('btnDisabled')
         document.querySelector('#cardSlot1').innerHTML = ``
         document.querySelector('#cardSlot2').innerHTML = ``
         document.querySelector('#result').innerHTML = `The winner is ____`
