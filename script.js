@@ -1,4 +1,7 @@
 let deckId = ''
+const shuffleBtn = document.querySelector('#shuffleBtn')
+const drawBtn = document.querySelector('#drawBtn')
+
   
 function getDeck() {
   fetch('https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/')
@@ -6,6 +9,11 @@ function getDeck() {
   .then(data => {
     deckId = data.deck_id
     document.querySelector('#remainingCards').innerHTML = `Remaining Cards: ${data.remaining}`
+    drawBtn.disabled = false;
+    drawBtn.classList.remove('btnDisabled')
+    shuffleBtn.disabled = true;
+    shuffleBtn.classList.add('btnDisabled')
+    document.querySelector('#result').innerHTML = ``
   })
 }
 
@@ -14,13 +22,24 @@ function draw2() {
     .then(res => res.json())
     .then(data => {
       console.log(data)
-      document.querySelector('#cardSlot1').innerHTML = `
-      <img src=${data.cards[0].image}>`
-      document.querySelector('#cardSlot2').innerHTML = `
-      <img src=${data.cards[1].image}>
-      `
-      document.querySelector('#result').innerHTML = getWinner(data.cards[0], data.cards[1])
-      document.querySelector('#remainingCards').innerHTML = `Remaining Cards: ${data.remaining}`
+      if (data.success) {
+        document.querySelector('#cardSlot1').innerHTML = `
+        <img src=${data.cards[0].image}>`
+        document.querySelector('#cardSlot2').innerHTML = `
+        <img src=${data.cards[1].image}>
+        `
+        document.querySelector('#result').innerHTML = getWinner(data.cards[0], data.cards[1])
+        document.querySelector('#remainingCards').innerHTML = `Remaining Cards: ${data.remaining}`
+      } 
+      else {
+        drawBtn.disabled = true;
+        drawBtn.classList.add('btnDisabled')
+        shuffleBtn.disabled = false;
+        shuffleBtn.classList.remove('btnDisabled')
+        document.querySelector('#cardSlot1').innerHTML = ``
+        document.querySelector('#cardSlot2').innerHTML = ``
+        document.querySelector('#result').innerHTML = `The winner is ____`
+      }
     })
 }
 
@@ -48,5 +67,5 @@ function getWinner(card1, card2) {
   } else return 'War!'
 }
 
-document.querySelector('#shuffleBtn').addEventListener('click', getDeck)
-document.querySelector('#drawBtn').addEventListener('click', draw2)
+shuffleBtn.addEventListener('click', getDeck)
+drawBtn.addEventListener('click', draw2)
