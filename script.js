@@ -1,6 +1,10 @@
 let deckId = ''
 const shuffleBtn = document.querySelector('#shuffleBtn')
 const drawBtn = document.querySelector('#drawBtn')
+const scores = {
+  player1: 0,
+  player2: 0
+}
 
   
 function getDeck() {
@@ -10,9 +14,7 @@ function getDeck() {
     deckId = data.deck_id
     document.querySelector('#remainingCards').innerHTML = `Remaining Cards: ${data.remaining}`
     drawBtn.disabled = false;
-
     shuffleBtn.disabled = true;
-
     document.querySelector('#result').innerHTML = ``
   })
 }
@@ -36,7 +38,16 @@ function draw2() {
         shuffleBtn.disabled = false;
         document.querySelector('#cardSlot1').innerHTML = ``
         document.querySelector('#cardSlot2').innerHTML = ``
-        document.querySelector('#result').innerHTML = `The winner is ____`
+        
+        let winner = ''
+        if (scores.player1 > scores.player2) {
+          winner = 'Player 1'
+        } if (scores.player1 < scores.player2) {
+          winner = 'Player 2'
+        }
+        document.querySelector('#result').innerHTML = `${
+          scores.player1 === scores.player2 ? 'Tie Game' : winner + ' wins!'
+        }`
       }
     })
 }
@@ -59,8 +70,10 @@ function getWinner(card1, card2) {
   }
 
   if (cardKey[card1.value] > cardKey[card2.value]) {
+    scores.player1++
     return 'Card 1 Wins'
   } else if (cardKey[card1.value] < cardKey[card2.value]) {
+    scores.player2++
     return 'Card 2 Wins'
   } else return 'War!'
 }
